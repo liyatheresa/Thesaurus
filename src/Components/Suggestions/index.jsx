@@ -1,11 +1,13 @@
 import React from "react";
 import "./Suggestions.scss";
 
-const Suggestions = () => {
+const Suggestions = ({ searchResult }) => {
   return (
     <>
       <ul className="suggestion-list">
-        <li className="list-item">hi</li>
+        {searchResult.map((result) => {
+          return <li key={result.word}>{result.word}</li>;
+        })}
       </ul>
     </>
   );
