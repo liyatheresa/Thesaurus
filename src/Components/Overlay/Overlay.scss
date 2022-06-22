@@ -1,0 +1,16 @@
+.overlay-backdrop {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #00000088;
+}
+.content-overlay {
+  min-width: 500px;
+  min-height: 600px;
+  background-color: #fff;
+}
