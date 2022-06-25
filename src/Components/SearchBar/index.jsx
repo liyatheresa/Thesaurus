@@ -24,7 +24,6 @@ const SearchBar = (props) => {
             props.setSearchTerm(e.target.value);
           }}
         />
-        {/* <button onClick={() => props.setSearch(true)}>Search</button> */}
       </div>
       {isSuggestionsVisible && (
         <Suggestions searchResult={props.searchResult} />

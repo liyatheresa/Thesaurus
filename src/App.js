@@ -7,11 +7,17 @@ import "./App.css";
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResults] = useState([]);
-  const dataFetch = async () => {
+  const [definition, setDefinition] = useState([]);
+  const fetchWordSearchResults = async () => {
     try {
-      let url = `https://api.datamuse.com/sug?s=${searchTerm}`;
-      const { data } = await axios.get(url);
-      setSearchResults(data);
+      let dictionaryUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`;
+      const { data: response } = await axios.get(
+        "https://api.datamuse.com/sug",
+        { params: { s: searchTerm } }
+      );
+      const { data: result } = await axios.get(dictionaryUrl);
+      setSearchResults(response);
+      setDefinition(result);
     } catch (err) {
       console.log(err);
     }
@@ -19,9 +25,11 @@ function App() {
   useEffect(() => {
     if (searchTerm.trim() === "") {
       setSearchResults([]);
+      setDefinition([]);
       return;
     }
-    dataFetch();
+    fetchWordSearchResults();
+    console.log(definition);
   }, [searchTerm]);
 
   return (
