@@ -21,8 +21,6 @@ function App() {
       setSearchResults([]);
       return;
     }
-    console.log(searchResult);
-    console.log(searchTerm);
     dataFetch();
   }, [searchTerm]);
 
