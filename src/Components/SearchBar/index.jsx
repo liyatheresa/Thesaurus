@@ -9,9 +9,13 @@ const SearchBar = (props) => {
     setSuggestionsVisibility(true);
   };
   const hideSuggestions = () => {
+    setSuggestionsVisibility(true);
+  };
+  const onWordSelected = (word) => {
+    props.onWordSelection(word);
+    props.setSearchTerm(word);
     setSuggestionsVisibility(false);
   };
-
   return (
     <div className="search-area">
       <div className="search-bar">
@@ -20,13 +24,15 @@ const SearchBar = (props) => {
           placeholder="Search the word..."
           onFocus={showSuggestions}
           onBlur={hideSuggestions}
-          onChange={(e) => {
-            props.setSearchTerm(e.target.value);
-          }}
+          onChange={(e) => props.setSearchTerm(e.target.value)}
+          value={props.searchTerm}
         />
       </div>
       {isSuggestionsVisible && (
-        <Suggestions searchResult={props.searchResult} />
+        <Suggestions
+          searchResult={props.searchResult}
+          onWordSelected={onWordSelected}
+        />
       )}
     </div>
   );

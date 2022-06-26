@@ -7,6 +7,7 @@ import "./App.css";
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResults] = useState([]);
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const fetchWordSearchResults = async () => {
     try {
       const { data: response } = await axios.get(
@@ -26,14 +27,20 @@ function App() {
     fetchWordSearchResults();
   }, [searchTerm]);
 
+  const onWordSelection = (word) => {
+    setIsOverlayVisible(true);
+  };
   return (
     <>
       <SearchBar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         searchResult={searchResult}
+        onWordSelection={onWordSelection}
       />
-      {/* {search && <Overlay />} */}
+      {isOverlayVisible && (
+        <Overlay word={searchTerm} setIsOverlayVisible={setIsOverlayVisible} />
+      )}
     </>
   );
 }
