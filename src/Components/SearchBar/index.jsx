@@ -20,9 +20,7 @@ const SearchBar = (props) => {
           placeholder="Search the word..."
           onFocus={showSuggestions}
           onBlur={hideSuggestions}
-          onChange={(e) => {
-            props.setSearchTerm(e.target.value);
-          }}
+          onChange={(e) => props.setSearchTerm(e.target.value)}
         />
       </div>
       {isSuggestionsVisible && (
