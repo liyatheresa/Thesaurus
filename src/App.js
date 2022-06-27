@@ -8,7 +8,7 @@ import { WORD_SEARCH_URL } from "./constants";
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResults] = useState([]);
-
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const fetchWordSearchResults = async () => {
     if (searchTerm.trim() === "") {
       setSearchResults([]);

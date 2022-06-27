@@ -4,8 +4,7 @@ import { DICTIONARY_URL } from "../../constants";
 import axios from "axios";
 
 const Overlay = ({ word, setIsOverlayVisible }) => {
-  const [definition, setDefinition] = useState([]);
-  const listOfMeanings = [];
+  const [definitions, setDefinition] = useState([]);
   const getWordDefinition = async () => {
     try {
       const url = DICTIONARY_URL + word;
@@ -22,7 +21,7 @@ const Overlay = ({ word, setIsOverlayVisible }) => {
     }
   };
   // setDefinition(listOfMeanings);
-  console.log(definition);
+  console.log(definitions);
 
   useEffect(() => {
     getWordDefinition();
@@ -35,9 +34,9 @@ const Overlay = ({ word, setIsOverlayVisible }) => {
         onClick={() => setIsOverlayVisible(false)}
       >
         <div className="content-overlay">
-          {definition ? (
+          {definitions.length !== 0 ? (
             <ul>
-              {definition.map((eachMeaning) => {
+              {definitions.map((eachMeaning) => {
                 return <li key={eachMeaning}>{eachMeaning}</li>;
               })}
             </ul>
