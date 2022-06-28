@@ -2,28 +2,29 @@ import React, { useEffect, useState } from "react";
 import "./Overlay.scss";
 import { DICTIONARY_URL } from "../../constants";
 import axios from "axios";
+import { fetchData } from "../../util";
 
 const Overlay = ({ word, setIsOverlayVisible }) => {
   const [definitions, setDefinition] = useState([]);
-  const getWordDefinition = async () => {
-    try {
-      const url = DICTIONARY_URL + word;
-      const { data } = await axios.get(url);
-      data.map((response) => {
-        return response.meanings.map((each) =>
-          each.definitions.map((desc) =>
-            setDefinition((value) => [...value, desc.definition])
-          )
-        );
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  // setDefinition(listOfMeanings);
   console.log(definitions);
 
   useEffect(() => {
+    const getWordDefinition = async () => {
+      const url = DICTIONARY_URL + word;
+      let { succeeded, response } = await fetchData(url);
+      if (succeeded) {
+        response.map((data) => {
+          return data.meanings.map((each) =>
+            each.definitions.map((desc) =>
+              setDefinition((value) => [...value, desc.definition])
+            )
+          );
+        });
+      } else {
+        // setDefinition(response);
+        setDefinition((value) => [...value, response.response.data.title]);
+      }
+    };
     getWordDefinition();
   }, []);
 
