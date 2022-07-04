@@ -28,6 +28,14 @@ function App() {
     fetchWordSearchResults();
   }, [searchTerm]);
 
+  useEffect(() => {
+    if (isOverlayVisible) {
+      document.body.style.setProperty("overflow", "hidden");
+    } else {
+      document.body.style.setProperty("overflow", "auto");
+    }
+  }, [isOverlayVisible]);
+
   const onWordSelection = (word) => {
     setIsOverlayVisible(true);
   };
