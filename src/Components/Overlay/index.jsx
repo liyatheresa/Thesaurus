@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Overlay.scss";
 import { DICTIONARY_URL } from "../../constants";
-import axios from "axios";
 import { fetchData } from "../../util";
 
 const Overlay = ({ word, setIsOverlayVisible }) => {
