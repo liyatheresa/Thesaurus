@@ -1,5 +1,5 @@
 .overlay-backdrop {
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,7 +10,9 @@
   background-color: #00000088;
 }
 .content-overlay {
-  min-width: 500px;
-  min-height: 600px;
+  width: clamp(500px, 75%, 900px);
+  min-height: 100px;
+  max-height: 90%;
+  overflow: auto;
   background-color: #fff;
 }
