@@ -16,6 +16,7 @@ function App() {
     }
     let { succeeded, response } = await fetchData(WORD_SEARCH_URL, {
       s: searchTerm,
+      y: "s",
     });
     if (succeeded) {
       setSearchResults(response);
