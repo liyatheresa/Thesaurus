@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Suggestions from "../Suggestions";
-// import Select from "react-select";
+import { Input } from "antd";
+// import { TreeSelect } from "antd";
 import "./SearchBar.scss";
 
 const SearchBar = (props) => {
@@ -19,7 +20,7 @@ const SearchBar = (props) => {
   return (
     <div className="search-area">
       <div className="search-bar">
-        <input
+        <Input
           type="text"
           placeholder="Search the word..."
           onFocus={showSuggestions}

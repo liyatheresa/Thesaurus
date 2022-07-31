@@ -4,11 +4,14 @@ import SearchBar from "./Components/SearchBar";
 import "./App.css";
 import { fetchData } from "./util.js";
 import { WORD_SEARCH_URL } from "./constants";
+import "antd/dist/antd.css";
+import { notification } from "antd";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResults] = useState([]);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+  const [requestResult, setRequestResult] = useState(true);
   const fetchWordSearchResults = async () => {
     if (searchTerm.trim() === "") {
       setSearchResults([]);
@@ -17,10 +20,15 @@ function App() {
     let { succeeded, response } = await fetchData(WORD_SEARCH_URL, {
       s: searchTerm,
     });
+    setRequestResult(succeeded);
     if (succeeded) {
       setSearchResults(response);
     } else {
-      console.log("Something went wrong!"); //To-do: ant design error alert component
+      notification.error({
+        message: "Error",
+        description: "Word not found!",
+      });
+      // console.log("Something went wrong!"); //To-do: ant design error alert component
     }
   };
 
@@ -45,8 +53,10 @@ function App() {
         searchResult={searchResult}
         onWordSelection={onWordSelection}
       />
-      {isOverlayVisible && (
+      {isOverlayVisible && requestResult ? (
         <Overlay word={searchTerm} setIsOverlayVisible={setIsOverlayVisible} />
+      ) : (
+        ""
       )}
     </>
   );
