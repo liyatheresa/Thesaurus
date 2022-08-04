@@ -3,8 +3,9 @@ import "./Overlay.scss";
 import { DICTIONARY_URL } from "../../constants";
 import { fetchData } from "../../util";
 import { notification } from "antd";
+import { Modal } from "antd";
 
-const Overlay = ({ word, setIsOverlayVisible }) => {
+const Overlay = ({ word, setIsModalVisible, isModalVisible }) => {
   const [definitions, setDefinition] = useState([]);
   // const [error, setError] = useState({ isSuccess: true, errorMessage: "" });
 
@@ -28,7 +29,7 @@ const Overlay = ({ word, setIsOverlayVisible }) => {
         //   isSuccess: false,
         //   errorMessage: response.response.data.title,
         // });
-        setIsOverlayVisible(false);
+        setIsModalVisible(false);
         notification.error({
           message: "Error",
           description: "Word not found!",
@@ -38,24 +39,28 @@ const Overlay = ({ word, setIsOverlayVisible }) => {
     getWordDefinition();
   }, []);
 
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
   return (
     <>
-      <div
-        className="overlay-backdrop"
-        onClick={() => setIsOverlayVisible(false)}
+      <Modal
+        title={word}
+        visible={isModalVisible}
+        onOk={handleOk}
+        cancelButtonProps={{ className: "hidden" }}
       >
-        <div className="content-overlay">
-          {definitions.length !== 0 ? (
-            <ul>
-              {definitions.map((eachMeaning) => {
-                return <li key={eachMeaning}>{eachMeaning}</li>;
-              })}
-            </ul>
-          ) : (
-            <div>Data loading...</div>
-          )}
-        </div>
-      </div>
+        {definitions.length !== 0 ? (
+          <ul className="list-of-meanings">
+            {definitions.map((eachMeaning) => {
+              return <li key={eachMeaning}>{eachMeaning}</li>;
+            })}
+          </ul>
+        ) : (
+          <div>Data loading...</div>
+        )}
+      </Modal>
     </>
   );
 };

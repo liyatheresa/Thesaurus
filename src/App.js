@@ -4,12 +4,13 @@ import SearchBar from "./Components/SearchBar";
 import "./App.css";
 import { fetchData } from "./util.js";
 import { WORD_SEARCH_URL } from "./constants";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResults] = useState([]);
-  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const fetchWordSearchResults = async () => {
     if (searchTerm.trim() === "") {
       setSearchResults([]);
@@ -21,7 +22,7 @@ function App() {
     if (succeeded) {
       setSearchResults(response);
     } else {
-      console.log("Something went wrong!"); //To-do: ant design error alert component
+      console.log("Something went wrong!");
     }
   };
 
@@ -30,13 +31,13 @@ function App() {
   }, [searchTerm]);
 
   useEffect(() => {
-    isOverlayVisible
+    isModalVisible
       ? document.body.style.setProperty("overflow", "hidden")
       : document.body.style.setProperty("overflow", "auto");
-  }, [isOverlayVisible]);
+  }, [isModalVisible]);
 
   const onWordSelection = (word) => {
-    setIsOverlayVisible(true);
+    setIsModalVisible(true);
   };
   return (
     <>
@@ -46,8 +47,12 @@ function App() {
         searchResult={searchResult}
         onWordSelection={onWordSelection}
       />
-      {isOverlayVisible && (
-        <Overlay word={searchTerm} setIsOverlayVisible={setIsOverlayVisible} />
+      {isModalVisible && (
+        <Overlay
+          word={searchTerm}
+          setIsModalVisible={setIsModalVisible}
+          isModalVisible={isModalVisible}
+        />
       )}
     </>
   );
