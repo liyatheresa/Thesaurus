@@ -1,8 +1,16 @@
 .ant-modal-body {
   overflow-y: auto;
 }
+.ant-collapse-content > .ant-collapse-content-box {
+  padding: 0 !important;
+}
+.ant-collapse-content-box > .ant-collapse {
+  margin-left: 10px !important;
+}
 .list-of-meanings {
-  max-height: 300px;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 0 1rem 0 2.4rem;
 }
 .hidden {
   display: none !important;
