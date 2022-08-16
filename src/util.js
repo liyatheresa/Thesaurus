@@ -5,8 +5,8 @@ const fetchData = async (url, queryParameters) => {
     const response = await axios.get(url, { params: queryParameters });
     return { succeeded: true, response: response.data };
   } catch (err) {
-    console.log(err);
     return { succeeded: false, response: err };
   }
 };
+
 export { fetchData };

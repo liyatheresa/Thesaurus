@@ -18,6 +18,7 @@ function App() {
     }
     let { succeeded, response } = await fetchData(WORD_SEARCH_URL, {
       s: searchTerm,
+      max: 8,
     });
     if (succeeded) {
       setSearchResults(response);

@@ -16,12 +16,21 @@
   padding: 0 1rem 0 2.4rem;
   border: 1px solid #eee;
   padding-top: 3px;
+  .ant-typography {
+    display: block;
+    padding-bottom: 5px;
+  }
+}
+.ant-spin-spinning {
+  display: flex !important;
+  justify-content: center !important;
 }
 .main-collapse-title {
   display: flex;
   flex-direction: row;
   gap: 2rem;
 }
+
 .hidden {
   display: none !important;
 }

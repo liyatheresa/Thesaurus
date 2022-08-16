@@ -1,40 +1,41 @@
-import React, { useState } from "react";
-import Suggestions from "../Suggestions";
+import React from "react";
 import { Input } from "antd";
-// import { TreeSelect } from "antd";
+import { Dropdown, Menu } from "antd";
 import "./SearchBar.scss";
 
 const SearchBar = (props) => {
-  const [isSuggestionsVisible, setSuggestionsVisibility] = useState(false);
-  const showSuggestions = () => {
-    setSuggestionsVisibility(true);
-  };
-  const hideSuggestions = () => {
-    setSuggestionsVisibility(true);
-  };
   const onWordSelected = (word) => {
     props.onWordSelection(word);
     props.setSearchTerm(word);
-    setSuggestionsVisibility(false);
   };
+  let wordList = props.searchResult.map((wordDetails, index) => ({
+    label: wordDetails.word,
+    key: index,
+  }));
+
   return (
     <div className="search-area">
       <div className="search-bar">
-        <Input
-          type="text"
-          placeholder="Search the word..."
-          onFocus={showSuggestions}
-          onBlur={hideSuggestions}
-          onChange={(e) => props.setSearchTerm(e.target.value)}
-          value={props.searchTerm}
-        />
+        <Dropdown
+          overlay={
+            <Menu
+              onClick={({ key }) => {
+                onWordSelected(wordList[key].label);
+              }}
+              items={wordList}
+            />
+          }
+          trigger={["click"]}
+          placement="bottom"
+        >
+          <Input
+            type="text"
+            placeholder="Search the word..."
+            onChange={(e) => props.setSearchTerm(e.target.value)}
+            value={props.searchTerm}
+          />
+        </Dropdown>
       </div>
-      {isSuggestionsVisible && (
-        <Suggestions
-          searchResult={props.searchResult}
-          onWordSelected={onWordSelected}
-        />
-      )}
     </div>
   );
 };
