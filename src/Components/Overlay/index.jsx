@@ -46,6 +46,7 @@ const Overlay = ({ word, setIsModalVisible, isModalVisible }) => {
 
   const closeModal = () => {
     setIsModalVisible(false);
+    document.querySelector(".ant-dropdown-menu").classList.remove("hidden");
   };
 
   return (

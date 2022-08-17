@@ -39,9 +39,11 @@ function App() {
 
   const onWordSelection = (word) => {
     setIsModalVisible(true);
+    document.querySelector(".ant-dropdown-menu").classList.add("hidden");
   };
   return (
     <>
+      <div className="title">Thesaurus</div>
       <SearchBar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}

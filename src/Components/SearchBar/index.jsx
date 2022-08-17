@@ -2,6 +2,7 @@ import React from "react";
 import { Input } from "antd";
 import { Dropdown, Menu } from "antd";
 import "./SearchBar.scss";
+const { Search } = Input;
 
 const SearchBar = (props) => {
   const onWordSelected = (word) => {
@@ -28,11 +29,14 @@ const SearchBar = (props) => {
           trigger={["click"]}
           placement="bottom"
         >
-          <Input
+          <Search
             type="text"
             placeholder="Search the word..."
             onChange={(e) => props.setSearchTerm(e.target.value)}
             value={props.searchTerm}
+            onSearch={(word) => {
+              onWordSelected(word);
+            }}
           />
         </Dropdown>
       </div>
