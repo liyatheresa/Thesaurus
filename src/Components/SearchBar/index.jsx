@@ -19,10 +19,10 @@ const SearchBar = (props) => {
     key: index,
   }));
 
-  useEffect(
-    () => setIsDropdownVisible(props.searchResult.length > 0),
-    [props.searchResult]
-  );
+  useEffect(() => {
+    !props.isModalVisible &&
+      setIsDropdownVisible(props.searchResult.length > 0);
+  }, [props.searchResult]);
 
   return (
     <div className="search-area">
