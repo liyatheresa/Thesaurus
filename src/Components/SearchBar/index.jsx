@@ -1,13 +1,17 @@
 import React from "react";
 import { Input, Dropdown, Menu } from "antd";
 import "./SearchBar.scss";
+import { useState } from "react";
+import { useEffect } from "react";
 const { Search } = Input;
 
 const SearchBar = (props) => {
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
   const onWordSelected = (word) => {
     props.onWordSelection(word);
     props.setSearchTerm(word);
-    props.setIsDropdownVisible(false);
+    setIsDropdownVisible(false);
   };
 
   let wordList = props.searchResult.map((wordDetails, index) => ({
@@ -15,17 +19,20 @@ const SearchBar = (props) => {
     key: index,
   }));
 
+  useEffect(
+    () => setIsDropdownVisible(props.searchResult.length > 0),
+    [props.searchResult]
+  );
+
   return (
     <div className="search-area">
       <div className="search-bar">
         <Dropdown
-          visible={props.isDropdownVisible}
+          visible={isDropdownVisible && !props.isModalVisible}
+          className="search-results-dropdown"
           overlay={
             <Menu
-              onClick={({ key }) => {
-                onWordSelected(wordList[key].label);
-                console.log(document.activeElement);
-              }}
+              onClick={({ key }) => onWordSelected(wordList[key].label)}
               items={wordList}
             />
           }
@@ -35,19 +42,12 @@ const SearchBar = (props) => {
           <Search
             type="text"
             placeholder="Search the word..."
-            onChange={(e) => props.setSearchTerm(e.target.value)}
-            onFocus={() => props.setIsDropdownVisible(true)}
-            onBlur={() => {
-              setTimeout(() => {
-                if (
-                  !document.activeElement.classList.contains(
-                    "ant-dropdown-menu-item"
-                  )
-                ) {
-                  props.setIsDropdownVisible(false);
-                }
-              }, 100);
+            onChange={(e) => {
+              props.setSearchTerm(e.target.value);
             }}
+            onFocus={(e) =>
+              e.target.value.length > 0 && setIsDropdownVisible(true)
+            }
             value={props.searchTerm}
             onSearch={onWordSelected}
           />

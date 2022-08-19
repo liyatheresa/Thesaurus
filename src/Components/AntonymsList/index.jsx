@@ -4,12 +4,7 @@ const AntonymsList = ({ data, sectionIndex }) => {
     <>
       <ol className="list-of-meanings">
         {data?.antonyms.map((antonym, antonymIndex) => (
-          <li
-            key={"antonym-" + sectionIndex + antonymIndex}
-            ckey={"antonym-" + sectionIndex + antonymIndex}
-          >
-            {antonym}
-          </li>
+          <li key={`antonym-${sectionIndex}-${antonymIndex}`}>{antonym}</li>
         ))}
       </ol>
     </>

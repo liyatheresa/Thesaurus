@@ -4,12 +4,7 @@ const SynonymsList = ({ data, sectionIndex }) => {
     <>
       <ol className="list-of-meanings">
         {data?.synonyms.map((synonym, synonymIndex) => (
-          <li
-            key={"synonym-" + sectionIndex + synonymIndex}
-            ckey={"synonym-" + sectionIndex + synonymIndex}
-          >
-            {synonym}
-          </li>
+          <li key={`synonym-${sectionIndex}-${synonymIndex}`}>{synonym}</li>
         ))}
       </ol>
     </>

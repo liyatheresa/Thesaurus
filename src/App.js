@@ -9,7 +9,6 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResults] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   useEffect(() => {
     if (searchTerm.trim() === "") {
@@ -34,9 +33,9 @@ function App() {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         searchResult={searchResult}
+        setSearchResults={setSearchResults}
         onWordSelection={onWordSelection}
-        isDropdownVisible={isDropdownVisible}
-        setIsDropdownVisible={setIsDropdownVisible}
+        isModalVisible={isModalVisible}
       />
       <Overlay
         word={searchTerm}

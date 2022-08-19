@@ -9,13 +9,11 @@ const MeaningsList = ({ data, sectionIndex }) => {
       <div className="list-of-meanings">
         {data?.definitions.map((definition, definitionIndex) => {
           return (
-            <ol key={"definition-" + sectionIndex + definitionIndex}>
+            <ol key={`definition-${sectionIndex}-${definitionIndex}`}>
               <Text keyboard>{definition.partOfSpeech}</Text>
               {definition?.meanings.map((meaning, meaningIndex) => (
                 <li
-                  key={
-                    "meaning-" + sectionIndex + definitionIndex + meaningIndex
-                  }
+                  key={`meaning-${sectionIndex}-${definitionIndex}-${meaningIndex}`}
                 >
                   {meaning}
                 </li>

@@ -10,7 +10,7 @@ const PanelHeader = ({ partsOfSpeech, data, sectionIndex }) => {
             (partOfSpeech, partOfSpeechIndex) => (
               <Tag
                 color="#777"
-                key={partOfSpeech + sectionIndex + partOfSpeechIndex}
+                key={`${partOfSpeech}-${sectionIndex}-${partOfSpeechIndex}`}
               >
                 {partOfSpeech}
               </Tag>
