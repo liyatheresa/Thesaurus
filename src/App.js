@@ -1,45 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Overlay from "./Components/Overlay";
 import SearchBar from "./Components/SearchBar";
 import "./App.css";
-import { fetchData } from "./util.js";
-import { WORD_SEARCH_URL } from "./constants";
 import "antd/dist/antd.min.css";
+import { fetchWordSearchResults } from "./requests";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResults] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-  const fetchWordSearchResults = async () => {
+  useEffect(() => {
     if (searchTerm.trim() === "") {
       setSearchResults([]);
-      return;
-    }
-    let { succeeded, response } = await fetchData(WORD_SEARCH_URL, {
-      s: searchTerm,
-      max: 8,
-    });
-    if (succeeded) {
-      setSearchResults(response);
     } else {
-      console.log("Something went wrong!");
+      const wrapperFunction = async () => {
+        let response = await fetchWordSearchResults(searchTerm);
+        setSearchResults(response);
+      };
+      wrapperFunction();
     }
-  };
-
-  useEffect(() => {
-    fetchWordSearchResults();
   }, [searchTerm]);
-
-  useEffect(() => {
-    isModalVisible
-      ? document.body.style.setProperty("overflow", "hidden")
-      : document.body.style.setProperty("overflow", "auto");
-  }, [isModalVisible]);
 
   const onWordSelection = (word) => {
     setIsModalVisible(true);
-    document.querySelector(".ant-dropdown-menu").classList.add("hidden");
+    // document.querySelector(".ant-dropdown-menu").classList.add("hidden");
   };
   return (
     <>
@@ -49,14 +35,14 @@ function App() {
         setSearchTerm={setSearchTerm}
         searchResult={searchResult}
         onWordSelection={onWordSelection}
+        isDropdownVisible={isDropdownVisible}
+        setIsDropdownVisible={setIsDropdownVisible}
       />
-      {isModalVisible && (
-        <Overlay
-          word={searchTerm}
-          setIsModalVisible={setIsModalVisible}
-          isModalVisible={isModalVisible}
-        />
-      )}
+      <Overlay
+        word={searchTerm}
+        setIsModalVisible={setIsModalVisible}
+        isModalVisible={isModalVisible}
+      />
     </>
   );
 }

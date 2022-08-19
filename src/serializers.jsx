@@ -1,29 +1,32 @@
 const serializeWordDefinition = (response) => {
-  let simplifiedResponse = {};
-  simplifiedResponse.word = response[0].word;
-  simplifiedResponse.sections = [];
-  response?.forEach((each) => {
+  let serializedResponse = {};
+  serializedResponse.word = response[0].word;
+  serializedResponse.sections = [];
+  response?.forEach((section) => {
     let wordDetails = {};
-    wordDetails.phonetic = each.phonetic;
+    wordDetails.phonetic = section.phonetic;
     wordDetails.synonyms = [];
     wordDetails.antonyms = [];
     wordDetails.definitions = [];
-    each.meanings.forEach((each) => {
+    section.meanings.forEach((wordInfo) => {
       let meaningsAndPartOfSpeech = {};
       meaningsAndPartOfSpeech.meanings = [];
-      return (
-        each.synonyms.forEach((synonym) => wordDetails.synonyms.push(synonym)),
-        each.antonyms.forEach((antonym) => wordDetails.antonyms.push(antonym)),
-        (meaningsAndPartOfSpeech.partOfSpeech = each.partOfSpeech),
-        each.definitions.forEach((desc) =>
-          meaningsAndPartOfSpeech.meanings.push(desc.definition)
-        ),
-        wordDetails.definitions.push(meaningsAndPartOfSpeech)
+      wordInfo.synonyms.forEach((synonym) =>
+        wordDetails.synonyms.push(synonym)
       );
+      wordInfo.antonyms.forEach((antonym) =>
+        wordDetails.antonyms.push(antonym)
+      );
+      meaningsAndPartOfSpeech.partOfSpeech = wordInfo.partOfSpeech;
+      wordInfo.definitions.forEach((description) =>
+        meaningsAndPartOfSpeech.meanings.push(description.definition)
+      );
+      wordDetails.definitions.push(meaningsAndPartOfSpeech);
     });
-    simplifiedResponse.sections.push(wordDetails);
+    serializedResponse.sections.push(wordDetails);
   });
-  return simplifiedResponse;
+
+  return serializedResponse;
 };
 
 export { serializeWordDefinition };
