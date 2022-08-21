@@ -1,18 +1,21 @@
-.overlay-backdrop {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  background-color: #00000088;
-}
-.content-overlay {
-  width: clamp(500px, 75%, 900px);
-  min-height: 100px;
-  max-height: 90%;
-  overflow: auto;
-  background-color: #fff;
+.ant-modal-root {
+  .ant-spin-spinning {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .main-collapse-title {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+  .ant-modal-body {
+    overflow-y: auto;
+    .ant-collapse-item > .ant-collapse-content > .ant-collapse-content-box {
+      padding: 0 !important;
+      .ant-collapse {
+        margin-left: 10px !important;
+      }
+    }
+  }
 }

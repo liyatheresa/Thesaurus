@@ -8,4 +8,5 @@ const fetchData = async (url, queryParameters) => {
     return { succeeded: false, response: err };
   }
 };
+
 export { fetchData };

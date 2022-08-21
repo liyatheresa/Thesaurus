@@ -1,0 +1,13 @@
+.list-of-meanings {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 0 1rem 0 2.4rem;
+  border: 1px solid #eee;
+  padding-top: 3px;
+  margin-bottom: 10px;
+  .ant-typography {
+    cursor: text;
+    display: block;
+    padding-bottom: 5px;
+  }
+}

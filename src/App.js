@@ -1,53 +1,46 @@
 import React, { useState, useEffect } from "react";
 import Overlay from "./Components/Overlay";
 import SearchBar from "./Components/SearchBar";
+import { fetchWordSearchResults } from "./requests";
+import "antd/dist/antd.min.css";
 import "./App.css";
-import { fetchData } from "./util.js";
-import { WORD_SEARCH_URL } from "./constants";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResults] = useState([]);
-  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
-  const fetchWordSearchResults = async () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  useEffect(() => {
     if (searchTerm.trim() === "") {
       setSearchResults([]);
-      return;
-    }
-    let { succeeded, response } = await fetchData(WORD_SEARCH_URL, {
-      s: searchTerm,
-    });
-    if (succeeded) {
-      setSearchResults(response);
     } else {
-      console.log("Something went wrong!"); //To-do: ant design error alert component
+      const wrapperFunction = async () => {
+        let response = await fetchWordSearchResults(searchTerm);
+        setSearchResults(response);
+      };
+      wrapperFunction();
     }
-  };
-
-  useEffect(() => {
-    fetchWordSearchResults();
   }, [searchTerm]);
 
-  useEffect(() => {
-    isOverlayVisible
-      ? document.body.style.setProperty("overflow", "hidden")
-      : document.body.style.setProperty("overflow", "auto");
-  }, [isOverlayVisible]);
-
   const onWordSelection = (word) => {
-    setIsOverlayVisible(true);
+    setIsModalVisible(true);
   };
   return (
     <>
+      <div className="title">Thesaurus</div>
       <SearchBar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         searchResult={searchResult}
+        setSearchResults={setSearchResults}
         onWordSelection={onWordSelection}
+        isModalVisible={isModalVisible}
       />
-      {isOverlayVisible && (
-        <Overlay word={searchTerm} setIsOverlayVisible={setIsOverlayVisible} />
-      )}
+      <Overlay
+        word={searchTerm}
+        setIsModalVisible={setIsModalVisible}
+        isModalVisible={isModalVisible}
+      />
     </>
   );
 }
