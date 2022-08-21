@@ -1,5 +1,6 @@
 import React from "react";
 import { Tag } from "antd";
+
 const PanelHeader = ({ partsOfSpeech, data, sectionIndex }) => {
   return (
     <>

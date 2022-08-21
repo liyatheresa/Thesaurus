@@ -1,6 +1,7 @@
 import React from "react";
-import "./MeaningsList.scss";
 import { Typography } from "antd";
+import "./MeaningsList.scss";
+
 const { Text } = Typography;
 
 const MeaningsList = ({ data, sectionIndex }) => {

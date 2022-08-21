@@ -29,4 +29,6 @@ const serializeWordDefinition = (response) => {
   return serializedResponse;
 };
 
-export { serializeWordDefinition };
+const serializeSuggestions = (response) =>
+  response.map((suggestion) => suggestion.word);
+export { serializeWordDefinition, serializeSuggestions };

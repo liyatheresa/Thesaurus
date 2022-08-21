@@ -1,8 +1,7 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { Input, Dropdown, Menu } from "antd";
 import "./SearchBar.scss";
-import { useState } from "react";
-import { useEffect } from "react";
 const { Search } = Input;
 
 const SearchBar = (props) => {
@@ -14,8 +13,8 @@ const SearchBar = (props) => {
     setIsDropdownVisible(false);
   };
 
-  let wordList = props.searchResult.map((wordDetails, index) => ({
-    label: wordDetails.word,
+  let wordList = props.searchResult.map((word, index) => ({
+    label: word,
     key: index,
   }));
 
@@ -42,9 +41,7 @@ const SearchBar = (props) => {
           <Search
             type="text"
             placeholder="Search the word..."
-            onChange={(e) => {
-              props.setSearchTerm(e.target.value);
-            }}
+            onChange={(e) => props.setSearchTerm(e.target.value)}
             onFocus={(e) =>
               e.target.value.length > 0 && setIsDropdownVisible(true)
             }

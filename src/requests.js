@@ -1,11 +1,11 @@
+import { notification } from "antd";
 import { fetchData } from "./util.js";
 import {
   WORD_SEARCH_URL,
   MAX_RESULTS_TO_RETURN,
   DICTIONARY_URL,
 } from "./constants";
-import { notification } from "antd";
-import { serializeWordDefinition } from "./serializers";
+import { serializeWordDefinition, serializeSuggestions } from "./serializers";
 
 const fetchWordSearchResults = async (searchTerm) => {
   let { succeeded, response } = await fetchData(WORD_SEARCH_URL, {
@@ -13,9 +13,8 @@ const fetchWordSearchResults = async (searchTerm) => {
     max: MAX_RESULTS_TO_RETURN,
   });
   if (succeeded) {
-    //setSearchResults(response);
-    // console.log(response);
-    return response;
+    let suggestions = serializeSuggestions(response);
+    return suggestions;
   } else {
     notification.error({
       message: "Error",

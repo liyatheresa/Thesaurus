@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Overlay from "./Components/Overlay";
 import SearchBar from "./Components/SearchBar";
-import "./App.css";
-import "antd/dist/antd.min.css";
 import { fetchWordSearchResults } from "./requests";
+import "antd/dist/antd.min.css";
+import "./App.css";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -24,7 +24,6 @@ function App() {
 
   const onWordSelection = (word) => {
     setIsModalVisible(true);
-    // document.querySelector(".ant-dropdown-menu").classList.add("hidden");
   };
   return (
     <>
