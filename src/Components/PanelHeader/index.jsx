@@ -1,5 +1,6 @@
 import React from "react";
 import { Tag } from "antd";
+import Pronunciation from "../Pronunciation";
 
 const PanelHeader = ({ partsOfSpeech, data, sectionIndex }) => {
   return (
@@ -17,6 +18,9 @@ const PanelHeader = ({ partsOfSpeech, data, sectionIndex }) => {
               </Tag>
             )
           )}
+        </div>
+        <div>
+          <Pronunciation data={data} />
         </div>
       </div>
     </>
