@@ -6,11 +6,7 @@ import "./Pronunciation.scss";
 const Pronunciation = ({ sectionData }) => {
   const getAudioPath = (sectionData) => {
     if (sectionData.audio.length > 0) {
-      if (sectionData.audio[0]) {
-        return sectionData.audio[0];
-      } else if (sectionData.audio.length > 1) {
-        return sectionData.audio[1];
-      }
+      return sectionData.audio.find((audio) => audio !== "");
     }
   };
   const playAudio = (e) => {
@@ -27,7 +23,7 @@ const Pronunciation = ({ sectionData }) => {
         shape="circle"
         icon={<SoundOutlined />}
         onClick={(e) => playAudio(e)}
-      ></Button>
+      />
     )
   );
 };
