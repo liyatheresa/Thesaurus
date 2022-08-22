@@ -11,9 +11,9 @@ body,
 #root {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   position: relative;
+  gap: 20px;
 }
 .hidden {
   display: none !important;
@@ -21,4 +21,5 @@ body,
 .title {
   font-size: 50px;
   font-weight: 800;
+  margin-top: 13rem;
 }

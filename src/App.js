@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { debounce } from "lodash";
 import Overlay from "./Components/Overlay";
 import SearchBar from "./Components/SearchBar";
 import { fetchWordSearchResults } from "./requests";
@@ -14,13 +15,20 @@ function App() {
     if (searchTerm.trim() === "") {
       setSearchResults([]);
     } else {
-      const wrapperFunction = async () => {
-        let response = await fetchWordSearchResults(searchTerm);
-        setSearchResults(response);
-      };
-      wrapperFunction();
+      debouncedFetchWordSearchResults();
     }
+    return debouncedFetchWordSearchResults.cancel;
   }, [searchTerm]);
+
+  const fetchAndUpdateSearchResults = async () => {
+    let response = await fetchWordSearchResults(searchTerm);
+    setSearchResults(response);
+  };
+
+  const debouncedFetchWordSearchResults = useCallback(
+    debounce(fetchAndUpdateSearchResults, 500),
+    [searchTerm]
+  );
 
   const onWordSelection = (word) => {
     setIsModalVisible(true);
