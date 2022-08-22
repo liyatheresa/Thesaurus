@@ -4,11 +4,9 @@ import { SoundOutlined } from "@ant-design/icons";
 import "./Pronunciation.scss";
 
 const Pronunciation = ({ sectionData }) => {
-  const getAudioPath = (sectionData) => {
-    if (sectionData.audio.length > 0) {
-      return sectionData.audio.find((audio) => audio !== "");
-    }
-  };
+  const getAudioPath = (sectionData) =>
+    sectionData.audio.find((audio) => audio !== "");
+
   const playAudio = (e) => {
     e.stopPropagation();
     var audio = new Audio();
@@ -17,12 +15,12 @@ const Pronunciation = ({ sectionData }) => {
   };
 
   return (
-    sectionData.audio.length > 0 && (
+    sectionData.audio.some((audiopath) => audiopath !== "") && (
       <Button
         type="text"
         shape="circle"
         icon={<SoundOutlined />}
-        onClick={(e) => playAudio(e)}
+        onClick={playAudio}
       />
     )
   );
