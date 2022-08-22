@@ -4,13 +4,13 @@ import { SoundOutlined } from "@ant-design/icons";
 import "./Pronunciation.scss";
 
 const Pronunciation = ({ sectionData }) => {
-  const getAudioPath = (sectionData) =>
+  const getAudioUrl = (sectionData) =>
     sectionData.audio.find((audio) => audio !== "");
 
   const playAudio = (e) => {
     e.stopPropagation();
-    var audio = new Audio();
-    audio.src = getAudioPath(sectionData);
+    let audio = new Audio();
+    audio.src = getAudioUrl(sectionData);
     audio.play();
   };
 
