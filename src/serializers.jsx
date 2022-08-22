@@ -8,9 +8,8 @@ const serializeWordDefinition = (response) => {
     wordDetails.synonyms = [];
     wordDetails.antonyms = [];
     wordDetails.definitions = [];
-    wordDetails.audio = [];
-    section.phonetics.forEach((audioDetails) =>
-      wordDetails.audio.push(audioDetails.audio)
+    wordDetails.audio = section.phonetics.map(
+      (audioDetails) => audioDetails.audio
     );
     section.meanings.forEach((wordInfo) => {
       let meaningsAndPartOfSpeech = {};

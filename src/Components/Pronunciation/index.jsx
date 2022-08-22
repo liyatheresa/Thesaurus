@@ -1,37 +1,34 @@
 import React from "react";
-import { notification } from "antd";
-import { AiTwotoneSound } from "react-icons/ai";
+import { Button } from "antd";
+import { SoundOutlined } from "@ant-design/icons";
 import "./Pronunciation.scss";
 
-const Pronunciation = ({ data }) => {
-  const getAudioPath = (data) => {
-    if (data.audio.length > 0) {
-      if (data.audio[0]) {
-        return data.audio[0];
-      } else if (data.audio.length > 1) {
-        return data.audio[1];
+const Pronunciation = ({ sectionData }) => {
+  const getAudioPath = (sectionData) => {
+    if (sectionData.audio.length > 0) {
+      if (sectionData.audio[0]) {
+        return sectionData.audio[0];
+      } else if (sectionData.audio.length > 1) {
+        return sectionData.audio[1];
       }
-    } else {
-      notification.error({
-        message: "Error",
-        description: "Pronunciation not found!",
-      });
     }
   };
+  const playAudio = (e) => {
+    e.stopPropagation();
+    var audio = new Audio();
+    audio.src = getAudioPath(sectionData);
+    audio.play();
+  };
+
   return (
-    <>
-      <button
-        className="pronunciation-play-button"
-        onClick={(e) => {
-          e.stopPropagation();
-          var audio = new Audio();
-          audio.src = getAudioPath(data);
-          audio.play();
-        }}
-      >
-        <AiTwotoneSound size={20} />
-      </button>
-    </>
+    sectionData.audio.length > 0 && (
+      <Button
+        type="text"
+        shape="circle"
+        icon={<SoundOutlined />}
+        onClick={(e) => playAudio(e)}
+      ></Button>
+    )
   );
 };
 
