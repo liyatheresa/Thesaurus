@@ -60,42 +60,51 @@ const Overlay = ({ word, setIsModalVisible, isModalVisible }) => {
             defaultActiveKey={[`0-${wordDetails.sections[0]?.phonetic}`]}
             accordion
           >
-            {wordDetails.sections?.map((data, sectionIndex) => (
+            {wordDetails.sections?.map((sectionData, sectionIndex) => (
               <Panel
                 header={
                   <PanelHeader
-                    data={data}
+                    sectionData={sectionData}
                     sectionIndex={sectionIndex}
                     partsOfSpeech={partsOfSpeech}
                   />
                 }
-                key={`${sectionIndex}-${data.phonetic}`}
+                key={`${sectionIndex}-${sectionData.phonetic}`}
               >
                 <Collapse
                   ghost
                   accordion
-                  defaultActiveKey={[`definition-0-${data.phonetic}`]}
+                  defaultActiveKey={[`definition-0-${sectionData.phonetic}`]}
                 >
                   <Panel
                     header="Definitions"
-                    key={`definition-${sectionIndex}-${data.phonetic}`}
+                    key={`definition-${sectionIndex}-${sectionData.phonetic}`}
                   >
-                    <MeaningsList data={data} sectionIndex={sectionIndex} />
+                    <MeaningsList
+                      data={sectionData}
+                      sectionIndex={sectionIndex}
+                    />
                   </Panel>
-                  {data.synonyms.length > 0 && (
+                  {sectionData.synonyms.length > 0 && (
                     <Panel
                       header="Synonyms"
-                      key={`synonym-${data.phonetic}${sectionIndex}`}
+                      key={`synonym-${sectionData.phonetic}${sectionIndex}`}
                     >
-                      <SynonymsList data={data} sectionIndex={sectionIndex} />
+                      <SynonymsList
+                        data={sectionData}
+                        sectionIndex={sectionIndex}
+                      />
                     </Panel>
                   )}
-                  {data.antonyms.length > 0 && (
+                  {sectionData.antonyms.length > 0 && (
                     <Panel
                       header="Antonyms"
-                      key={`antonym-${data.phonetic}${sectionIndex}`}
+                      key={`antonym-${sectionData.phonetic}${sectionIndex}`}
                     >
-                      <AntonymsList data={data} sectionIndex={sectionIndex} />
+                      <AntonymsList
+                        data={sectionData}
+                        sectionIndex={sectionIndex}
+                      />
                     </Panel>
                   )}
                 </Collapse>

@@ -1,11 +1,13 @@
 import React from "react";
 import { Tag } from "antd";
+import Pronunciation from "../Pronunciation";
+import "./PanelHeader.scss";
 
-const PanelHeader = ({ partsOfSpeech, data, sectionIndex }) => {
+const PanelHeader = ({ partsOfSpeech, sectionData, sectionIndex }) => {
   return (
     <>
       <div className="main-collapse-title">
-        {data.phonetic}
+        {sectionData.phonetic}
         <div>
           {partsOfSpeech[sectionIndex].map(
             (partOfSpeech, partOfSpeechIndex) => (
@@ -17,6 +19,9 @@ const PanelHeader = ({ partsOfSpeech, data, sectionIndex }) => {
               </Tag>
             )
           )}
+        </div>
+        <div className="speaker">
+          <Pronunciation sectionData={sectionData} />
         </div>
       </div>
     </>
