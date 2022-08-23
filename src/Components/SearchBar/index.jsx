@@ -1,6 +1,6 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { Input, Dropdown, Menu } from "antd";
+import { useEffect } from "react";
+import { Input, Dropdown, Menu, notification } from "antd";
 import "./SearchBar.scss";
 const { Search } = Input;
 
@@ -14,9 +14,16 @@ const SearchBar = ({
   setIsDropdownVisible,
 }) => {
   const onWordSelected = (word) => {
-    onWordSelection(word);
-    setSearchTerm(word);
-    setIsDropdownVisible(false);
+    if (word.trim() !== "") {
+      onWordSelection(word);
+      setSearchTerm(word);
+      setIsDropdownVisible(false);
+    } else {
+      notification.error({
+        message: "Error",
+        description: "Enter something to search!",
+      });
+    }
   };
 
   let wordList = searchResult.map((word, index) => ({
