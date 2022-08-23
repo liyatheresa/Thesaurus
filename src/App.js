@@ -26,7 +26,7 @@ function App() {
   }, [searchTerm]);
 
   const fetchAndUpdateSearchResults = async () => {
-    let response = await fetchWordSearchResults(searchTerm);
+    let response = await fetchWordSearchResults(searchTerm.trim());
     setSearchResults(response);
   };
 
