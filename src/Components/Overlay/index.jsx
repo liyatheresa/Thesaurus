@@ -16,6 +16,7 @@ const Overlay = ({ word, setIsModalVisible, isModalVisible }) => {
   useEffect(() => {
     if (isModalVisible) {
       const wrapperFunc = async () => {
+        setWordDetails({});
         let { serializedResponse, succeeded } = await getWordDefinition(word);
         if (succeeded) {
           setWordDetails(serializedResponse);

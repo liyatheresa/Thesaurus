@@ -15,6 +15,7 @@ function App() {
   document
     .getElementById("root")
     .addEventListener("click", () => setIsDropdownVisible(false));
+
   useEffect(() => {
     if (searchTerm.trim() === "") {
       setSearchResults([]);
