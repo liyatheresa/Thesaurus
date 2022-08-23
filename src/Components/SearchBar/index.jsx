@@ -4,34 +4,42 @@ import { Input, Dropdown, Menu } from "antd";
 import "./SearchBar.scss";
 const { Search } = Input;
 
-const SearchBar = (props) => {
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-
+const SearchBar = ({
+  onWordSelection,
+  setSearchTerm,
+  searchResult,
+  isModalVisible,
+  searchTerm,
+  isDropdownVisible,
+  setIsDropdownVisible,
+}) => {
   const onWordSelected = (word) => {
-    props.onWordSelection(word);
-    props.setSearchTerm(word);
+    onWordSelection(word);
+    setSearchTerm(word);
     setIsDropdownVisible(false);
   };
 
-  let wordList = props.searchResult.map((word, index) => ({
+  let wordList = searchResult.map((word, index) => ({
     label: word,
     key: index,
   }));
 
   useEffect(() => {
-    !props.isModalVisible &&
-      setIsDropdownVisible(props.searchResult.length > 0);
-  }, [props.searchResult]);
+    !isModalVisible && setIsDropdownVisible(searchResult.length > 0);
+  }, [searchResult]);
 
   return (
     <div className="search-area">
       <div className="search-bar">
         <Dropdown
-          visible={isDropdownVisible && !props.isModalVisible}
+          visible={isDropdownVisible && !isModalVisible}
           className="search-results-dropdown"
           overlay={
             <Menu
-              onClick={({ key }) => onWordSelected(wordList[key].label)}
+              onClick={({ key, domEvent }) => {
+                domEvent.stopPropagation();
+                onWordSelected(wordList[key].label);
+              }}
               items={wordList}
             />
           }
@@ -41,11 +49,12 @@ const SearchBar = (props) => {
           <Search
             type="text"
             placeholder="Search the word..."
-            onChange={(e) => props.setSearchTerm(e.target.value)}
+            onChange={(e) => setSearchTerm(e.target.value)}
             onFocus={(e) =>
               e.target.value.length > 0 && setIsDropdownVisible(true)
             }
-            value={props.searchTerm}
+            onClick={(e) => e.nativeEvent.stopImmediatePropagation()}
+            value={searchTerm}
             onSearch={onWordSelected}
           />
         </Dropdown>
