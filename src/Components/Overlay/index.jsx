@@ -27,9 +27,7 @@ const Overlay = ({ word, setIsModalVisible, isModalVisible }) => {
     }
   }, [isModalVisible]);
 
-  const closeModal = () => {
-    setIsModalVisible(false);
-  };
+  const closeModal = () => setIsModalVisible(false);
 
   const getPartsOfSpeechList = () => {
     let partsOfSpeechList = [];
