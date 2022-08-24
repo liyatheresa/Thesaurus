@@ -6,6 +6,10 @@ This application helps to find meanings, synonyms, antonyms and pronunciations f
 
 This project was developed using ReactJs.
 
+<img src="https://user-images.githubusercontent.com/32489433/186506587-27f274cd-b675-4624-bc8b-05f662308754.png" width="500">
+<img src="https://user-images.githubusercontent.com/32489433/186507492-f9948895-41a4-4b89-aa72-e1de0ddffde7.png" width="500">
+<img src="https://user-images.githubusercontent.com/32489433/186507789-7cf560ac-29eb-4394-a053-1db9d55863e9.png" width="500">
+
 ## Demo
 
 To view the hosted site click [here](https://thesaurus-react.netlify.app/).
