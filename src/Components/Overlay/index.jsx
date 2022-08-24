@@ -26,6 +26,7 @@ const Overlay = ({ word, setIsModalVisible, isModalVisible }) => {
       };
       wrapperFunc();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isModalVisible]);
 
   const closeModal = () => setIsModalVisible(false);
