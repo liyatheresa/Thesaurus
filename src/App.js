@@ -31,9 +31,9 @@ function App() {
     setSearchResults(response);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedFetchWordSearchResults = useCallback(
-    () => debounce(fetchAndUpdateSearchResults, 500),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    debounce(fetchAndUpdateSearchResults, 500),
     [searchTerm]
   );
 
