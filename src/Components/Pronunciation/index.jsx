@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "antd";
+import { Button, Tooltip } from "antd";
 import { SoundOutlined } from "@ant-design/icons";
 import "./Pronunciation.scss";
 
@@ -16,12 +16,19 @@ const Pronunciation = ({ sectionData }) => {
 
   return (
     sectionData.audio.some((audiopath) => audiopath !== "") && (
-      <Button
-        type="text"
-        shape="circle"
-        icon={<SoundOutlined />}
-        onClick={playAudio}
-      />
+      <Tooltip
+        title="Read out"
+        color="#666"
+        placement="left"
+        arrowPointAtCenter
+      >
+        <Button
+          type="text"
+          shape="circle"
+          icon={<SoundOutlined />}
+          onClick={playAudio}
+        />
+      </Tooltip>
     )
   );
 };
