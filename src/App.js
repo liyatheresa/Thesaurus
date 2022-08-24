@@ -23,6 +23,7 @@ function App() {
       debouncedFetchWordSearchResults();
     }
     return debouncedFetchWordSearchResults.cancel;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm]);
 
   const fetchAndUpdateSearchResults = async () => {
@@ -31,7 +32,8 @@ function App() {
   };
 
   const debouncedFetchWordSearchResults = useCallback(
-    debounce(fetchAndUpdateSearchResults, 500),
+    () => debounce(fetchAndUpdateSearchResults, 500),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [searchTerm]
   );
 

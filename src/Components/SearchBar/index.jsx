@@ -33,6 +33,7 @@ const SearchBar = ({
 
   useEffect(() => {
     !isModalVisible && setIsDropdownVisible(searchResult.length > 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchResult]);
 
   return (
