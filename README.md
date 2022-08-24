@@ -13,8 +13,8 @@ To view the hosted site click [here](https://thesaurus-react.netlify.app/).
 ## Dependency
 
 - [Ant Design](https://ant.design/components/overview/) components were used throughout this application.
-- [Datamuse API] (https://www.datamuse.com/api/) is used to generate suggestions.
-- [Dictionary API] (https://dictionaryapi.dev/) is used to get the definitions, synonyms, antonyms, phonetics and pronunciation of the word.
+- [Datamuse API](https://www.datamuse.com/api/) is used to generate suggestions.
+- [Dictionary API](https://dictionaryapi.dev/) is used to get the definitions, synonyms, antonyms, phonetics and pronunciation of the word.
 
 ## Contribute
 
