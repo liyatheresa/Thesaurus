@@ -8,7 +8,7 @@ This project was developed using ReactJs.
 
 ## Demo
 
-
+To view the hosted site click [here](https://thesaurus-react.netlify.app/).
 
 ## Dependency
 
