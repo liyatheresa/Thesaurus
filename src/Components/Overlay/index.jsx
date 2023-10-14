@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Collapse, Spin } from "antd";
+
 import PanelHeader from "../PanelHeader";
 import MeaningsList from "../MeaningsList";
 import SynonymsList from "../SynonymsList";
 import AntonymsList from "../AntonymsList";
 import { getWordDefinition } from "../../requests";
+
 import "./Overlay.scss";
 
 const { Panel } = Collapse;
