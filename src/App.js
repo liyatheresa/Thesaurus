@@ -44,7 +44,7 @@ function App() {
   };
   return (
     <>
-      <div className="title">Thesaurus</div>
+      <h1 className="title">Thesaurus</h1>
       <SearchBar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}

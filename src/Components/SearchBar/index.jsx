@@ -39,7 +39,7 @@ const SearchBar = ({
   }, [searchResult]);
 
   return (
-    <div className="search-area">
+    <article className="search-area">
       <div className="search-bar">
         <Dropdown
           visible={isDropdownVisible && !isModalVisible}
@@ -69,7 +69,7 @@ const SearchBar = ({
           />
         </Dropdown>
       </div>
-    </div>
+    </article>
   );
 };
 
