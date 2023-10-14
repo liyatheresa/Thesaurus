@@ -1,8 +1,10 @@
 import React from "react";
 import { useEffect } from "react";
 import { Input, Dropdown, Menu, notification } from "antd";
-import "./SearchBar.scss";
+
 const { Search } = Input;
+
+import "./SearchBar.scss";
 
 const SearchBar = ({
   onWordSelection,

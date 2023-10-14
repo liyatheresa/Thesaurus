@@ -1,6 +1,8 @@
 import React from "react";
 import { Button, Tooltip } from "antd";
+
 import { SoundOutlined } from "@ant-design/icons";
+
 import "./Pronunciation.scss";
 
 const Pronunciation = ({ sectionData }) => {

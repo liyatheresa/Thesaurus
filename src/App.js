@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { debounce } from "lodash";
+
 import Overlay from "./Components/Overlay";
 import SearchBar from "./Components/SearchBar";
 import { fetchWordSearchResults } from "./requests";
+
 import "antd/dist/antd.min.css";
 import "./App.css";
 
